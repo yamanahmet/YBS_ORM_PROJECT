@@ -4,13 +4,13 @@ function sendMailOperation(mailadress){
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-        user: 'test@gmail.com', //You should mail
-        pass: 'PASSWORD' //You should "Google Uygulama Şifreleri" password
+        user: 'temp@gmail.com', //You must enter your mail
+        pass: 'PASSWORD' //You You must enter your password
         }
     });
     
     var mailOptions = {
-        from: 'test@gmail.com', //You should mail
+        from: 'temp@gmail.com', //You must enter your mail
         to: mailadress,
         subject: 'Test Mail Subject',
         text: 'Test!'

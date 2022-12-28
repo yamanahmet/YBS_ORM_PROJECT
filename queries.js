@@ -27,7 +27,8 @@ const createUser = (request, response) => {
       if (error) {
         throw error
       }
-      response.status(201).send(`Success`)
+      //response.status(201).send(`Success`)
+      response.redirect('/success_musteri_kayit_alindi.html')
   })
 }
 
@@ -40,12 +41,13 @@ const addUserNote = (request, response) => {
       if (error) {
         throw error
       }
-      response.status(201).send(`Success`)
+      //response.status(201).send(`Success`)
+      response.redirect('/success_musteri_kayit_alindi.html')
   })
 }
 
 const getTickets = (request, response) => {
-  pool.query('SELECT * FROM support ORDER BY id ASC', (error, results) => {
+  pool.query('SELECT * FROM tickets ORDER BY id ASC', (error, results) => {
     if (error) {
       throw error
     }
@@ -57,12 +59,13 @@ const createTicket = (request, response) => {
   const { customerid, msg } = request.body
 
   pool.query(
-    'INSERT INTO support(customerid, msg) VALUES ($1, $2)',
+    'INSERT INTO tickets (customerid, msg) VALUES ($1, $2)',
     [customerid, msg], (error, results) => {
       if (error) {
         throw error
       }
-      response.status(201).send(`Success`)
+      //response.status(201).send(`Success`)
+      response.redirect('/success_sikayet_gird_olusturuldu.html')
   })
 }
 
@@ -77,7 +80,8 @@ const sendEmailAllUsers = (request, response) => {
       emails.push(row.email);
     }
     sendMailOperation(emails.toString());
-    response.status(200).json(results.rows);
+    // response.status(200).json(results.rows);
+    response.redirect('/success_toplu_mail_gonderildi.html')
   })
 }
 
