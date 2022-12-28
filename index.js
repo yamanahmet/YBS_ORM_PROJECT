@@ -21,6 +21,7 @@ app.post('/addUserNote', db.addUserNote)
 app.get('/tickets', db.getTickets)
 app.post('/createTicket', db.createTicket)
 app.get('/sendEmailAllUsers', db.sendEmailAllUsers)
+app.post('/sendMailText', db.sendMailText)
 app.listen(port, () => {
   console.log(`App running on port ${port}.`)
 })

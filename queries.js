@@ -70,16 +70,58 @@ const createTicket = (request, response) => {
 }
 
 
+const sendMailText = (request, response) => {
+  const { subject, msg } = request.body
+
+  pool.query(
+    'INSERT INTO mails (subject, msg) VALUES ($1, $2)',
+    [subject, msg], (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(201).send(`Success`)
+      // response.redirect('/success_sikayet_gird_olusturuldu.html')
+  })
+}
+
+
+
+// const mailtextresponse = (request, response) =>{
+//   pool.query('SELECT subject, msg FROM mails', (error, mailtextresponse) => {
+//   if (error) {
+//     throw error
+//   }
+// }
+// }
+
+// const mailtextresponse  =  (request, response) => {
+//   pool.query('SELECT subject, msg FROM mails', (error, mailtextresponse) => {
+//     if (error) {
+//       throw error
+//     }
+
+//     // response.redirect('/success_toplu_mail_gonderildi.html')
+//     console.log(mailtextresponse)
+//   })
+// }
+
+
+
+
+
+
+
 const sendEmailAllUsers = (request, response) => {
   pool.query('SELECT email FROM users', (error, results) => {
     if (error) {
       throw error
     }
+
     const emails = [];
     for (const row of results.rows) {
       emails.push(row.email);
     }
-    sendMailOperation(emails.toString());
+    sendMailOperation(emails.toString());  //, mailsubject.toString(), mailmsg.toString()
     // response.status(200).json(results.rows);
     response.redirect('/success_toplu_mail_gonderildi.html')
   })
@@ -92,4 +134,5 @@ module.exports = {
   getTickets,
   createTicket,
   sendEmailAllUsers,
+  sendMailText,
 }
